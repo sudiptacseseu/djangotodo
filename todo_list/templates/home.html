@@ -5,5 +5,23 @@ Todo-list
 {% endblock %}
 
 {% block content %}
-<h1> Home page </h1>
+    {% if all_items %}
+    <table class="table table-bordered">
+        {%for todo_item in all_items %}
+            {% if todo_item.completed %}
+                <tr class="table-secondary">
+                    <td class="striker">{{ todo_item.item }}</td>
+                    <td><center>{{ todo_item.completed }}</center></td>
+                    <td><center>Delete</center></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>{{ todo_item.item }}</td>
+                    <td><center>{{ todo_item.completed }}</center></td>
+                    <td><center>Delete</center></td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    {% endif %}
 {% endblock %}
