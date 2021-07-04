@@ -5,20 +5,30 @@ Todo-list
 {% endblock %}
 
 {% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{ message }}
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
     {% if all_items %}
     <table class="table table-bordered">
         {%for todo_item in all_items %}
             {% if todo_item.completed %}
                 <tr class="table-secondary">
-                    <td class="striker">{{ todo_item.item }}</td>
-                    <td><center>{{ todo_item.completed }}</center></td>
-                    <td><center>Delete</center></td>
+                    <td class="striker"><a href= "{% url 'edit' todo_item.id %}">{{ todo_item.item }}</a></td>
+                    <td><center><a href= "{% url 'uncross' todo_item.id %}">Uncross</a></center></td>
+                    <td><center><a href= "{% url 'delete' todo_item.id %}"> Delete</a></center></td>
                 </tr>
             {% else %}
                 <tr>
-                    <td>{{ todo_item.item }}</td>
-                    <td><center>{{ todo_item.completed }}</center></td>
-                    <td><center>Delete</center></td>
+                    <td><a href= "{% url 'edit' todo_item.id %}">{{ todo_item.item }}</a></td>
+                    <td><center><a href= "{% url 'crossoff' todo_item.id %}"> Cross Off</a></center></td>
+                    <td><center><a href= "{% url 'delete' todo_item.id %}"> Delete</a></center></td>
                 </tr>
             {% endif %}
         {% endfor %}

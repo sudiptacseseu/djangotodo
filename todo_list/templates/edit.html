@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Todo-list | Edit Item
+{% endblock %}
+
+{% block content %}
+    {% if todo_item %}
+        <form class="d-flex" method="POST">
+          {% csrf_token %}
+            <div class="col-5">
+                <input class="form-control me-2" type="search" placeholder="{{todo_item.item}}" value="{{todo_item.item}}" aria-label="Search" name="item">
+            </div>
+            <input type="hidden" value="{{todo_item.completed}}" name="completed">
+            <button class="btn btn-outline-secondary mr-1" type="submit">Edit Item</button>
+        </form>
+    {% endif %}
+{% endblock %}
